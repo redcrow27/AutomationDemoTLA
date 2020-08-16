@@ -60,6 +60,19 @@ public class UserMgtPageTest extends BaseTest {
 
     }
 
+    @Test(description = "Verifying filling out the form")
+    public void verifyFillingOutFields(){
+        userMgtPage.moveIntoView(userMgtPage.dataTable);
+        screenshot.takeScreenshotAndLog();
+        Assert.assertEquals(userMgtPage.dataTable.getText().length(), 0);
+        extentTest.log(LogStatus.PASS, "Tested Table Data: " + userMgtPage.dataTable.getText() + " - with success");
+
+    }
+
+
+
+
+
     @AfterMethod
     public void tearDown(){
         getDriver().quit();
