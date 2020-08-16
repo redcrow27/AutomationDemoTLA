@@ -1,8 +1,10 @@
 package tests;
 
 import base.BaseTest;
+import com.github.javafaker.Faker;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -11,12 +13,14 @@ import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.HomePage;
 import pages.UserMgtPage;
+import pojos.User;
 
 import java.lang.reflect.Method;
 
 public class UserMgtPageTest extends BaseTest {
     UserMgtPage userMgtPage;
     CommonPage commonPage;
+    User user;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, ITestResult result) {
@@ -24,6 +28,7 @@ public class UserMgtPageTest extends BaseTest {
         userMgtPage = new UserMgtPage((getDriver()));
         commonPage = new CommonPage(getDriver());
         commonPage.clickNavBtn("User-Mgt");
+        user = new User();
     }
 
     @Test(description = "Verifying title of User-Mgt Page")
@@ -62,11 +67,18 @@ public class UserMgtPageTest extends BaseTest {
 
     @Test(description = "Verifying filling out the form")
     public void verifyFillingOutFields(){
+        commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail());
+        commonPage.selectByText("Instructor");
+        userMgtPage.click(userMgtPage.submitBtn);
         userMgtPage.moveIntoView(userMgtPage.dataTable);
         screenshot.takeScreenshotAndLog();
-        Assert.assertEquals(userMgtPage.dataTable.getText().length(), 0);
-        extentTest.log(LogStatus.PASS, "Tested Table Data: " + userMgtPage.dataTable.getText() + " - with success");
+        extentTest.log(LogStatus.PASS, "Tested data added to table: "+ user.getFirstName() +" | "+ user.getLastName() +
+                " | "+ user.getPhoneNumber() +" | "+ user.getEmail() +" - with success");
 
+        userMgtPage.click(userMgtPage.clearBtn);
+        Assert.assertEquals(userMgtPage.dataTable.getText().length(), 0);
+        screenshot.takeScreenshotAndLog();
+        extentTest.log(LogStatus.PASS, "Tested table is empty");
     }
 
 

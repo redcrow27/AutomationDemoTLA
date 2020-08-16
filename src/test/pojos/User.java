@@ -1,29 +1,32 @@
 package pojos;
 
 
+import base.BaseTest;
+import com.github.javafaker.Faker;
 
-public class User {
+public class User extends BaseTest {
 
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
-    private String password;
+    Faker faker = new Faker();
 
     public User() {
-
+        firstName = faker.name().firstName();
+        lastName = faker.name().lastName();
+        phoneNumber = faker.phoneNumber().cellPhone();
+        email = faker.internet().emailAddress();
     }
 
-    public User(String firstName, String lastName, String phoneNumber, String email, String password) {
+    public User(String firstName, String lastName, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.password = password;
     }
 
     public String getFirstName() {
-
         return firstName;
     }
 
@@ -32,12 +35,10 @@ public class User {
     }
 
     public String getLastName() {
-
         return lastName;
     }
 
     public void setLastName(String lastName) {
-
         this.lastName = lastName;
     }
 
@@ -55,13 +56,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
