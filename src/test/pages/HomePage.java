@@ -17,6 +17,14 @@ public class HomePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(xpath = "//a[starts-with(@class, 'navbar-brand ml-3')]")
+    public List<WebElement> linkTexts16;
+
+    @FindBy(linkText = "User-Mgt")
+    public WebElement userMgt_Btn;
+
+    public String[] navButtons = {"Home", "Inputs", "Selectors", "Select-class", "Alert", "Pop-Up", "Multiple-window",
+            "Tables", "Calendar", "iFrames", "Action-class","JS-Executor","Synchronization", "Files", "User-Mgt"};
 
 
 }
