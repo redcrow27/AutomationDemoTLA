@@ -1,18 +1,13 @@
 package tests;
 
 import base.BaseTest;
-import com.github.javafaker.Faker;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CommonPage;
-import pages.HomePage;
 import pages.UserMgtPage;
 import pojos.User;
 
@@ -75,8 +70,8 @@ public class UserMgtPageTest extends BaseTest {
 
         String[] str = {user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail(), selectRole};
         for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
-            extentTest.log(LogStatus.PASS,  userMgtPage.fName[i] + " has value: " +
-                    userMgtPage.tableInput.get(i).getText() + " and my object's " + userMgtPage.fName[i] + ": " + str[i]);
+            extentTest.log(LogStatus.PASS,  commonPage.headerName[i] + " has value: " +
+                    userMgtPage.tableInput.get(i).getText() + " and my object's " + commonPage.headerName[i] + ": " + str[i]);
         }
 
         userMgtPage.click(userMgtPage.clearBtn);
@@ -95,14 +90,14 @@ public class UserMgtPageTest extends BaseTest {
         String[] firstValue = new String[userMgtPage.tableInput.size()];
         for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
            firstValue[i] = userMgtPage.tableInput.get(i).getText();
-           extentTest.log(LogStatus.INFO, "Current " + userMgtPage.fName[i] + ": " +userMgtPage.tableInput.get(i).getText() );
+           extentTest.log(LogStatus.INFO, "Current " + commonPage.headerName[i] + ": " +userMgtPage.tableInput.get(i).getText() );
         }
 
         userMgtPage.click(userMgtPage.clearBtn);
         Assert.assertEquals(userMgtPage.tableInput.size(), 0);
         screenshot.takeScreenshotAndLog();
         for(int i = 0; i < userMgtPage.tableClmName.size(); i++) {
-            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] +" was " + firstValue[i] +
+            extentTest.log(LogStatus.PASS, commonPage.headerName[i] +" was " + firstValue[i] +
                     " after click Clear button current value: " + userMgtPage.dataTable.getText() + " - is empty");
         }
     }
@@ -117,14 +112,14 @@ public class UserMgtPageTest extends BaseTest {
         String[] firstVal = new String[userMgtPage.tableInput.size()];
         for (int i = 0; i < userMgtPage.tableInput.size(); i++) {
             firstVal[i] = userMgtPage.tableInput.get(i).getText();
-            extentTest.log(LogStatus.INFO, "Current " + userMgtPage.fName[i] + ": " + userMgtPage.tableInput.get(i).getText());
+            extentTest.log(LogStatus.INFO, "Current " + commonPage.headerName[i] + ": " + userMgtPage.tableInput.get(i).getText());
         }
 
         userMgtPage.click(userMgtPage.submitTableBtn);
         Assert.assertEquals(userMgtPage.tableInput.size(), 0);
         screenshot.takeScreenshotAndLog();
         for (int i = 0; i < userMgtPage.tableClmName.size(); i++) {
-            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + " was " + firstVal[i] +
+            extentTest.log(LogStatus.PASS, commonPage.headerName[i] + " was " + firstVal[i] +
                     " after click Submit_table button current value: " + userMgtPage.dataTable.getText() + " - is empty");
         }
     }
@@ -136,7 +131,7 @@ public class UserMgtPageTest extends BaseTest {
         screenshot.takeScreenshotAndLog();
         for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
             Assert.assertTrue(userMgtPage.tableInput.get(i).isDisplayed());
-            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + ": " + userMgtPage.tableInput.get(i).getText() + " - is Displayed." );
+            extentTest.log(LogStatus.PASS, commonPage.headerName[i] + ": " + userMgtPage.tableInput.get(i).getText() + " - is Displayed." );
         }
         userMgtPage.click(userMgtPage.submitTableBtn);
     }

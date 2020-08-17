@@ -45,7 +45,7 @@ public class UserMgtPage extends BasePage {
     @FindBy(id = "submit-table-btn")
     public WebElement submitTableBtn;
 
-    public String[] fName = {"First Name", "Last Name", "Phone Number", "Email", "Role"};
+
 
 
 

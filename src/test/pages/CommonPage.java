@@ -37,7 +37,12 @@ public class CommonPage extends BasePage {
     @FindBy(id ="access-db-btn")
     public WebElement accessDb_Btn;
 
+    @FindBy(xpath = "//thead//th")
+    public List<WebElement> headRow_DB;
+
     public String[] dataForDB = {"Alex", "De Souza", "+90 532 010 1907", "fenerbahce1907@fb.com", "Instructor"};
+
+    public String[] headerName = {"First name", "Last name", "Phone Number", "Email", "Role"};
 
     public void clickNavBtn(String buttonName) {
         click(driver.findElement(By.linkText(buttonName)));
@@ -45,6 +50,21 @@ public class CommonPage extends BasePage {
 
     public WebElement findById(String id) {
         return driver.findElement(By.id(id));
+    }
+
+    public Boolean compareArrAndList(String[] arr, List<WebElement> list) {
+        String str = "";
+        for(String el : arr) {
+            str += el + " ";
+        }
+
+        for(int i = 0; i < list.size(); i++) {
+            if(str.contains(list.get(i).getText())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void selectByText(String text) {
