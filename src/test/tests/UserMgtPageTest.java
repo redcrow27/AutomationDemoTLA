@@ -4,6 +4,7 @@ import base.BaseTest;
 import com.github.javafaker.Faker;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -66,11 +67,9 @@ public class UserMgtPageTest extends BaseTest {
     }
 
     @Test(description = "Verifying filling out the form")
-    public void verifyFillingOutFields(){
-        commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail());
+    public void verifyFillingOutFieldsAndDelete(){
         String selectRole = "Instructor";
-        commonPage.selectByText(selectRole);
-        userMgtPage.click(userMgtPage.submitBtn);
+        commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail(), selectRole);
         userMgtPage.moveIntoView(userMgtPage.dataTable);
         screenshot.takeScreenshotAndLog();
 
@@ -84,6 +83,50 @@ public class UserMgtPageTest extends BaseTest {
         Assert.assertEquals(userMgtPage.dataTable.getText().length(), 0);
         screenshot.takeScreenshotAndLog();
         extentTest.log(LogStatus.PASS, "Tested table is empty");
+    }
+
+    @Test(description = "verify Clear_table button will clear all records from the table")
+    public void verifyClearBtn(){
+        String selectRole = "Student";
+        commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail(), selectRole);
+        userMgtPage.moveIntoView(userMgtPage.dataTable);
+        screenshot.takeScreenshotAndLog();
+
+        String[] firstValue = new String[userMgtPage.tableInput.size()];
+        for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
+           firstValue[i] = userMgtPage.tableInput.get(i).getText();
+           extentTest.log(LogStatus.INFO, "Current " + userMgtPage.fName[i] + ": " +userMgtPage.tableInput.get(i).getText() );
+        }
+
+        userMgtPage.click(userMgtPage.clearBtn);
+        Assert.assertEquals(userMgtPage.tableInput.size(), 0);
+        screenshot.takeScreenshotAndLog();
+        for(int i = 0; i < userMgtPage.tableClmName.size(); i++) {
+            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] +" was " + firstValue[i] +
+                    " after click Clear button current value: " + userMgtPage.dataTable.getText() + " - is empty");
+        }
+    }
+
+    @Test(description = "verify Submit_table button will clear all records from the table")
+    public void verifySubmitTableBtn() {
+        String selectRole = "Mentor";
+        commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail(), selectRole);
+        userMgtPage.moveIntoView(userMgtPage.dataTable);
+        screenshot.takeScreenshotAndLog();
+
+        String[] firstValue = new String[userMgtPage.tableInput.size()];
+        for (int i = 0; i < userMgtPage.tableInput.size(); i++) {
+            firstValue[i] = userMgtPage.tableInput.get(i).getText();
+            extentTest.log(LogStatus.INFO, "Current " + userMgtPage.fName[i] + ": " + userMgtPage.tableInput.get(i).getText());
+        }
+
+        userMgtPage.click(userMgtPage.submitTableBtn);
+        Assert.assertEquals(userMgtPage.tableInput.size(), 0);
+        screenshot.takeScreenshotAndLog();
+        for (int i = 0; i < userMgtPage.tableClmName.size(); i++) {
+            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + " was " + firstValue[i] +
+                    " after click Submit_table button current value: " + userMgtPage.dataTable.getText() + " - is empty");
+        }
     }
 
 

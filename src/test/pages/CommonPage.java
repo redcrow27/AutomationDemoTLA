@@ -15,12 +15,22 @@ import java.util.List;
 public class CommonPage extends BasePage {
 
     WebDriver driver;
+    UserMgtPage userMgtPage;
 
     public CommonPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
+    @FindBy(id = "submit-btn")
+    public WebElement submitBtn;
+
+    @FindBy(xpath = "//input[@class='form-control']")
+    public List<WebElement> formFiilOut;
+
+    @FindBy(id = "Select-role")
+    public WebElement selectBtn;
 
     public void clickNavBtn(String buttonName) {
         click(driver.findElement(By.linkText(buttonName)));
@@ -30,23 +40,21 @@ public class CommonPage extends BasePage {
         return driver.findElement(By.id(id));
     }
 
-    @FindBy(xpath = "//input[@class='form-control']")
-    public List<WebElement> formFiilOut;
-
-    public void fiilForm(String firstName, String lastName, String phoneNumber, String email) {
-        sendKeys(formFiilOut.get(0), firstName);
-        sendKeys(formFiilOut.get(1), lastName);
-        sendKeys(formFiilOut.get(2), phoneNumber);
-        sendKeys(formFiilOut.get(3), email);
-    }
-
-    @FindBy(id = "Select-role")
-    public WebElement selectBtn;
-
     public void selectByText(String text) {
         click(selectBtn);
         Select select = new Select(selectBtn);
         select.selectByVisibleText(text);
     }
+
+    public void fiilForm(String firstName, String lastName, String phoneNumber, String email, String role) {
+        sendKeys(formFiilOut.get(0), firstName);
+        sendKeys(formFiilOut.get(1), lastName);
+        sendKeys(formFiilOut.get(2), phoneNumber);
+        sendKeys(formFiilOut.get(3), email);
+        selectByText(role);
+        click(submitBtn);
+    }
+
+
 
 }

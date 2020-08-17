@@ -5,6 +5,10 @@
     <test name="User-Mgt Page">
         <classes>
             <class name="tests.UserMgtPageTest">
+                <methods>
+                    <include name="verifyClearBtn"/>
+                    <include name="verifySubmitTableBtn"/>
+                </methods>
 
             </class>
         </classes>
