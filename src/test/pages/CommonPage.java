@@ -32,6 +32,12 @@ public class CommonPage extends BasePage {
     @FindBy(id = "Select-role")
     public WebElement selectBtn;
 
+    @FindBy(id ="login-btn")
+    public WebElement login_Btn;
+
+    @FindBy(id ="access-db-btn")
+    public WebElement accessDb_Btn;
+
     public void clickNavBtn(String buttonName) {
         click(driver.findElement(By.linkText(buttonName)));
     }
