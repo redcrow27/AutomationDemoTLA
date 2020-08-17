@@ -37,7 +37,13 @@ public class AccessDBPageTest extends BaseTest {
         user = new User();
     }
 
-
+    @Test(description = "Verifying Title of User Database Page")
+    public void verifyTitle(){
+        accessDBPage.windowHandle(mainWindow_ID, set);
+        screenshot.takeScreenshotAndLog();
+        Assert.assertEquals(getDriver().getTitle(), "User DB");
+        extentTest.log(LogStatus.PASS, "Tested title: " + getDriver().getTitle() + " - with success");
+    }
 
 
     @AfterMethod
