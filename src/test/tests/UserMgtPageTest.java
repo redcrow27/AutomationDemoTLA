@@ -114,9 +114,9 @@ public class UserMgtPageTest extends BaseTest {
         userMgtPage.moveIntoView(userMgtPage.dataTable);
         screenshot.takeScreenshotAndLog();
 
-        String[] firstValue = new String[userMgtPage.tableInput.size()];
+        String[] firstVal = new String[userMgtPage.tableInput.size()];
         for (int i = 0; i < userMgtPage.tableInput.size(); i++) {
-            firstValue[i] = userMgtPage.tableInput.get(i).getText();
+            firstVal[i] = userMgtPage.tableInput.get(i).getText();
             extentTest.log(LogStatus.INFO, "Current " + userMgtPage.fName[i] + ": " + userMgtPage.tableInput.get(i).getText());
         }
 
@@ -124,9 +124,21 @@ public class UserMgtPageTest extends BaseTest {
         Assert.assertEquals(userMgtPage.tableInput.size(), 0);
         screenshot.takeScreenshotAndLog();
         for (int i = 0; i < userMgtPage.tableClmName.size(); i++) {
-            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + " was " + firstValue[i] +
+            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + " was " + firstVal[i] +
                     " after click Submit_table button current value: " + userMgtPage.dataTable.getText() + " - is empty");
         }
+    }
+
+    @Test(description = "fiiling form with test data and submit")
+    public void validateFillForm() {
+        commonPage.fiilFormForDB();
+        userMgtPage.moveIntoView(userMgtPage.dataTable);
+        screenshot.takeScreenshotAndLog();
+        for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
+            Assert.assertTrue(userMgtPage.tableInput.get(i).isDisplayed());
+            extentTest.log(LogStatus.PASS, userMgtPage.fName[i] + ": " + userMgtPage.tableInput.get(i).getText() + " - is Displayed." );
+        }
+        userMgtPage.click(userMgtPage.submitTableBtn);
     }
 
 

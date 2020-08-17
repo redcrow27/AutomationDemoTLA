@@ -15,7 +15,6 @@ import java.util.List;
 public class CommonPage extends BasePage {
 
     WebDriver driver;
-    UserMgtPage userMgtPage;
 
     public CommonPage(WebDriver driver) {
         super(driver);
@@ -38,6 +37,8 @@ public class CommonPage extends BasePage {
     @FindBy(id ="access-db-btn")
     public WebElement accessDb_Btn;
 
+    public String[] dataForDB = {"Alex", "De Souza", "+90 532 010 1907", "fenerbahce1907@fb.com", "Instructor"};
+
     public void clickNavBtn(String buttonName) {
         click(driver.findElement(By.linkText(buttonName)));
     }
@@ -58,6 +59,15 @@ public class CommonPage extends BasePage {
         sendKeys(formFiilOut.get(2), phoneNumber);
         sendKeys(formFiilOut.get(3), email);
         selectByText(role);
+        click(submitBtn);
+    }
+
+
+    public void fiilFormForDB() {
+        for(int i = 0; i < 4; i++) {
+            sendKeys(formFiilOut.get(i), dataForDB[i]);
+        }
+        selectByText(dataForDB[4]);
         click(submitBtn);
     }
 

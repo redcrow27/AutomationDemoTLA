@@ -27,10 +27,7 @@ public class AccessDBPageTest extends BaseTest {
         user = new User();
     }
 
-    @Test
-    public void validateEnterPage() {
 
-    }
 
 
     @AfterMethod
