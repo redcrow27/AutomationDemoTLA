@@ -8,16 +8,15 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AccessDBPage;
+import pages.UserDatabasePage;
 import pages.CommonPage;
-import pages.LogInPage;
 import pojos.User;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
-public class AccessDBPageTest extends BaseTest {
-    AccessDBPage accessDBPage;
+public class UserDatabasePageTest extends BaseTest {
+    UserDatabasePage userDatabasePage;
     CommonPage commonPage;
     User user;
     JavascriptExecutor js;
@@ -27,7 +26,7 @@ public class AccessDBPageTest extends BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, ITestResult result) {
         super.setUp(method, result);
-        accessDBPage = new AccessDBPage(getDriver());
+        userDatabasePage = new UserDatabasePage(getDriver());
         commonPage = new CommonPage(getDriver());
         commonPage.clickNavBtn("User-Mgt");
         mainWindow_ID = getDriver().getWindowHandle();
@@ -39,7 +38,7 @@ public class AccessDBPageTest extends BaseTest {
 
     @Test(description = "Verifying Title of User Database Page")
     public void verifyTitle(){
-        accessDBPage.windowHandle(mainWindow_ID, set);
+        userDatabasePage.windowHandle(mainWindow_ID, set);
         screenshot.takeScreenshotAndLog();
         Assert.assertEquals(getDriver().getTitle(), "User DB");
         extentTest.log(LogStatus.PASS, "Tested title: " + getDriver().getTitle() + " - with success");
