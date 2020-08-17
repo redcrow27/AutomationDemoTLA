@@ -68,12 +68,17 @@ public class UserMgtPageTest extends BaseTest {
     @Test(description = "Verifying filling out the form")
     public void verifyFillingOutFields(){
         commonPage.fiilForm(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail());
-        commonPage.selectByText("Instructor");
+        String selectRole = "Instructor";
+        commonPage.selectByText(selectRole);
         userMgtPage.click(userMgtPage.submitBtn);
         userMgtPage.moveIntoView(userMgtPage.dataTable);
         screenshot.takeScreenshotAndLog();
-        extentTest.log(LogStatus.PASS, "Tested data added to table: "+ user.getFirstName() +" | "+ user.getLastName() +
-                " | "+ user.getPhoneNumber() +" | "+ user.getEmail() +" - with success");
+
+        String[] str = {user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEmail(), selectRole};
+        for(int i = 0; i < userMgtPage.tableInput.size(); i++) {
+            extentTest.log(LogStatus.PASS,  userMgtPage.fName[i] + " has value: " +
+                    userMgtPage.tableInput.get(i).getText() + " and my object's " + userMgtPage.fName[i] + ": " + str[i]);
+        }
 
         userMgtPage.click(userMgtPage.clearBtn);
         Assert.assertEquals(userMgtPage.dataTable.getText().length(), 0);

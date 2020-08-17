@@ -30,12 +30,19 @@ public class UserMgtPage extends BasePage {
     @FindBy(xpath = "//table[@id='list-table']//tbody")
     public WebElement dataTable;
 
-
     @FindBy(id = "submit-btn")
     public WebElement submitBtn;
 
     @FindBy(id = "clear-btn")
     public WebElement clearBtn;
+
+    @FindBy(xpath = "//table[@id='list-table']//td")
+    public List<WebElement> tableInput;
+
+    @FindBy(xpath = "//table[@id='list-table']//th")
+    public List<WebElement> tableClmName;
+
+    public String[] fName = {"First Name", "Last Name", "Phone Number", "Email", "Role"};
 
 
 

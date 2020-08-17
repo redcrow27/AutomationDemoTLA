@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,6 @@ import java.util.List;
 public class CommonPage extends BasePage {
 
     WebDriver driver;
-    User user = new User();
 
     public CommonPage(WebDriver driver) {
         super(driver);
@@ -48,6 +48,5 @@ public class CommonPage extends BasePage {
         Select select = new Select(selectBtn);
         select.selectByVisibleText(text);
     }
-
 
 }
