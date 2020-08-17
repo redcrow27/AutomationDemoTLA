@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Set;
 
 public class BasePage {
     protected WebDriver driver;
@@ -92,6 +93,14 @@ public class BasePage {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public void windowHandle(String mainWindow_ID, Set<String> set) {
+        for (String s: set) {
+            if (!s.equals(mainWindow_ID)) {
+                driver.switchTo().window(s);
             }
         }
     }
