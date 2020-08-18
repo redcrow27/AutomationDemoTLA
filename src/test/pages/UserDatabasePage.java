@@ -32,7 +32,7 @@ public class UserDatabasePage extends BasePage {
     public WebElement editBtn;
 
     @FindBy(xpath = "//td[7]//div/button[2]")
-    public WebElement deleteBtn;
+    public List<WebElement> deleteBtn;
 
     public Boolean checkEditDeleteBtn(List<WebElement> rows) {
         for(int i = 0; i < 3; i++) {

@@ -95,6 +95,20 @@ public class UserDatabasePageTest extends BaseTest {
         }
     }
 
+    @Test(description = "verify Delete button is removing user from the db table")
+    public void verifyDeleteBtn() {
+    userDatabasePage.moveIntoView(userDatabasePage.deleteBtn.get(0));
+    screenshot.takeScreenshotAndLog();
+    int beforeClickDeleteBtn = userDatabasePage.deleteBtn.size();
+    extentTest.log(LogStatus.INFO, "Tested and found " + beforeClickDeleteBtn + " delete buttons");
+
+    userDatabasePage.click(userDatabasePage.deleteBtn.get(0));
+    screenshot.takeScreenshotAndLog();
+    int afterClickDeleteBtn = userDatabasePage.deleteBtn.size();
+    Assert.assertNotEquals(beforeClickDeleteBtn, afterClickDeleteBtn);
+    extentTest.log(LogStatus.PASS, "Tested and found after clicking one of delete button: " + afterClickDeleteBtn + " buttons left");
+    }
+
 
     @AfterMethod
 
