@@ -4,6 +4,7 @@ import base.BaseTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -13,9 +14,11 @@ import pages.UserDatabasePage;
 import pages.CommonPage;
 import pojos.User;
 
+import javax.swing.*;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
+import org.openqa.selenium.interactions.Actions;
 
 public class UserDatabasePageTest extends BaseTest {
     UserDatabasePage userDatabasePage;
@@ -24,6 +27,7 @@ public class UserDatabasePageTest extends BaseTest {
     JavascriptExecutor js;
     String mainWindow_ID;
     Set<String> set;
+    Actions action;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, ITestResult result) {
@@ -37,6 +41,8 @@ public class UserDatabasePageTest extends BaseTest {
         js = (JavascriptExecutor) getDriver();
         user = new User();
         userDatabasePage.windowHandle(mainWindow_ID, set);
+        action = new Actions(getDriver());
+
     }
 
     @Test(description = "Verifying Title of User Database Page")
@@ -120,6 +126,24 @@ public class UserDatabasePageTest extends BaseTest {
         Assert.assertTrue(userDatabasePage.returnBtn.isDisplayed());
         extentTest.log(LogStatus.PASS, "Tested button: " + userDatabasePage.returnBtn.getText().toUpperCase() + " - with success");
 
+    }
+
+    @Test(description = "verify Edit button can update existing user's information")
+    public void verifyEditBtn() {
+        userDatabasePage.moveIntoView(userDatabasePage.editBtn);
+        screenshot.takeScreenshotAndLog();
+        extentTest.log(LogStatus.INFO, "Previous First name was: " + userDatabasePage.rowFourName.getText());
+        userDatabasePage.click(userDatabasePage.editBtn);
+        String testName = "Wolfeschlegelsteinhausenbergerdorff";
+        extentTest.log(LogStatus.INFO, "Test data name is: " + testName + " - created." );
+
+        userDatabasePage.click(userDatabasePage.firstNameBox);
+        userDatabasePage.firstNameBox.clear();
+        userDatabasePage.sendKeys(userDatabasePage.firstNameBox, testName);
+        userDatabasePage.click(userDatabasePage.updateBtn);
+        screenshot.takeScreenshotAndLog();
+        Assert.assertEquals(userDatabasePage.rowFourName.getText(), testName);
+        extentTest.log(LogStatus.PASS, "Current name is: " + userDatabasePage.rowFourName.getText() + " as same what we wrote: " + testName);
     }
 
 
