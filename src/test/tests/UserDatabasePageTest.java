@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import com.relevantcodes.extentreports.LogStatus;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -56,10 +57,15 @@ public class UserDatabasePageTest extends BaseTest {
         for (int i = 0; i < commonPage.headRow_DB.size() - 1; i++) {
             extentTest.log(LogStatus.PASS, "User Database table header row contains: " + commonPage.headRow_DB.get(i).getText());
         }
+    }
 
-
-
-
+    @Test(description = "verify 3 records are present with no edit or delete option")
+    public void verifyDeleteOption(){
+        userDatabasePage.moveIntoView(userDatabasePage.rows.get(0));
+        screenshot.takeScreenshotAndLog();
+        Assert.assertTrue(userDatabasePage.checkEditDeleteBtn(userDatabasePage.rows));
+        extentTest.log(LogStatus.PASS, "Tested first 3 rows does not have Edit and Delete button: " +
+                userDatabasePage.checkEditDeleteBtn(userDatabasePage.rows));
 
     }
 

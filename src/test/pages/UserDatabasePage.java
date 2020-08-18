@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,25 @@ public class UserDatabasePage extends BasePage {
 
     @FindBy(xpath = "//h1[text()='User Database']")
     public WebElement userDB;
+
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> rows;
+
+    @FindBy(xpath = "//td[7]//div/button[1]")
+    public WebElement editBtn;
+
+    @FindBy(xpath = "//td[7]//div/button[2]")
+    public WebElement deleteBtn;
+
+    public Boolean checkEditDeleteBtn(List<WebElement> rows) {
+        for(int i = 0; i < 3; i++) {
+            if( rows.get(i).findElement(By.xpath("//td[7]//div/button[1]")).isEnabled() && rows.get(i).findElement(By.xpath("//td[7]//div/button[2]")).isEnabled() ){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 
