@@ -86,7 +86,7 @@ public class UserDatabasePageTest extends BaseTest {
         }
     }
 
-    @Test(description = "verify default password is in firstname.lastname$ format")
+    @Test(description = "verify default password is in firstname.lastname$ format", priority = -1)
     public void verifyPasswordFormat() {
         userDatabasePage.moveIntoView(userDatabasePage.rows.get(0));
         screenshot.takeScreenshotAndLog();
@@ -99,6 +99,7 @@ public class UserDatabasePageTest extends BaseTest {
           extentTest.log(LogStatus.PASS, name + " and " + lastName + " Tested with firstname.lastname$ password format: " +
                    expectedPassword + " - with success");
         }
+
     }
 
     @Test(description = "verify Delete button is removing user from the db table")
@@ -134,7 +135,7 @@ public class UserDatabasePageTest extends BaseTest {
         screenshot.takeScreenshotAndLog();
         extentTest.log(LogStatus.INFO, "Previous First name was: " + userDatabasePage.rowFourName.getText());
         userDatabasePage.click(userDatabasePage.editBtn);
-        String testName = "Wolfeschlegelsteinhausenbergerdorff";
+        String testName = "Wolfesch";
         extentTest.log(LogStatus.INFO, "Test data name is: " + testName + " - created." );
 
         userDatabasePage.click(userDatabasePage.firstNameBox);
@@ -144,6 +145,8 @@ public class UserDatabasePageTest extends BaseTest {
         screenshot.takeScreenshotAndLog();
         Assert.assertEquals(userDatabasePage.rowFourName.getText(), testName);
         extentTest.log(LogStatus.PASS, "Current name is: " + userDatabasePage.rowFourName.getText() + " as same what we wrote: " + testName);
+
+        userDatabasePage.click(userDatabasePage.deleteBtn.get(0));
     }
 
 
