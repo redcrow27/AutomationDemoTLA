@@ -80,8 +80,24 @@ public class UserDatabasePageTest extends BaseTest {
         }
     }
 
+    @Test(description = "verify default password is in firstname.lastname$ format")
+    public void verifyPasswordFormat() {
+        userDatabasePage.moveIntoView(userDatabasePage.rows.get(0));
+        screenshot.takeScreenshotAndLog();
+
+        for(int i = 0; i < userDatabasePage.rows.size(); i++) {
+          String name = userDatabasePage.rows.get(i).findElement(By.xpath("td[1]")).getText().toLowerCase();
+          String lastName = userDatabasePage.rows.get(i).findElement(By.xpath("td[2]")).getText().toLowerCase();
+          String expectedPassword = userDatabasePage.rows.get(i).findElement(By.xpath("td[6]")).getText();
+          Assert.assertEquals(name + "." + lastName + "$", expectedPassword);
+          extentTest.log(LogStatus.PASS, name + " and " + lastName + " Tested with firstname.lastname$ password format: " +
+                   expectedPassword + " - with success");
+        }
+    }
+
 
     @AfterMethod
+
     public void tearDown(){
         getDriver().quit();
     }

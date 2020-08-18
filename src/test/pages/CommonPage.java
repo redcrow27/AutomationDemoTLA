@@ -40,7 +40,7 @@ public class CommonPage extends BasePage {
     @FindBy(xpath = "//thead//th")
     public List<WebElement> headRow_DB;
 
-    public String[] dataForDB = {"Alex", "De Souza", "+90 532 010 1907", "fenerbahce1907@fb.com", "Instructor"};
+    public String[] dataForDB = {"Alex", "DeSouza", "+90 532 010 1907", "fenerbahce1907@fb.com", "Instructor"};
 
     public String[] headerName = {"First name", "Last name", "Phone Number", "Email", "Role"};
 
