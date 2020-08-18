@@ -34,6 +34,12 @@ public class UserDatabasePage extends BasePage {
     @FindBy(xpath = "//td[7]//div/button[2]")
     public List<WebElement> deleteBtn;
 
+    @FindBy(xpath = "//button[text()='Update']")
+    public WebElement updateBtn;
+
+    @FindBy(xpath = "//button[text()='Return']")
+    public WebElement returnBtn;
+
     public Boolean checkEditDeleteBtn(List<WebElement> rows) {
         for(int i = 0; i < 3; i++) {
             if( rows.get(i).findElement(By.xpath("//td[7]//div/button[1]")).isEnabled() && rows.get(i).findElement(By.xpath("//td[7]//div/button[2]")).isEnabled() ){

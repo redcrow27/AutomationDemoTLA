@@ -109,6 +109,19 @@ public class UserDatabasePageTest extends BaseTest {
     extentTest.log(LogStatus.PASS, "Tested and found after clicking one of delete button: " + afterClickDeleteBtn + " buttons left");
     }
 
+    @Test(description = "verify Edit button has Update and Return options")
+    public void verifyUpdateAndReturn() {
+        userDatabasePage.moveIntoView(userDatabasePage.editBtn);
+        userDatabasePage.click(userDatabasePage.editBtn);
+        screenshot.takeScreenshotAndLog();
+
+        Assert.assertTrue(userDatabasePage.updateBtn.isDisplayed());
+        extentTest.log(LogStatus.PASS, "Tested button: " + userDatabasePage.updateBtn.getText().toUpperCase() + " - with success");
+        Assert.assertTrue(userDatabasePage.returnBtn.isDisplayed());
+        extentTest.log(LogStatus.PASS, "Tested button: " + userDatabasePage.returnBtn.getText().toUpperCase() + " - with success");
+
+    }
+
 
     @AfterMethod
 
