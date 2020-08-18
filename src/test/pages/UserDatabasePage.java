@@ -25,6 +25,9 @@ public class UserDatabasePage extends BasePage {
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> rows;
 
+    @FindBy(xpath = "//table")
+    public WebElement table;
+
     @FindBy(xpath = "//td[7]//div/button[1]")
     public WebElement editBtn;
 
@@ -39,6 +42,13 @@ public class UserDatabasePage extends BasePage {
         }
         return false;
     }
+
+    public String rXpatS(String str) {
+        String result = "//*[text()='"+ str +"']";
+        return result;
+    }
+
+
 
 
 

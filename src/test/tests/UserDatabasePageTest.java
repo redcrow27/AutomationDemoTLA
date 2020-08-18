@@ -69,6 +69,17 @@ public class UserDatabasePageTest extends BaseTest {
 
     }
 
+    @Test(description = "Register new record in User-Msg page and click Submit table button then verify data is displayed in User Database table correctly")
+    public void verifyTestDataExist() {
+        userDatabasePage.moveIntoView(userDatabasePage.table.findElement(By.xpath(userDatabasePage.rXpatS(commonPage.dataForDB[0]))));
+        screenshot.takeScreenshotAndLog();
+        for (int i = 0; i < commonPage.dataForDB.length; i++) {
+            Assert.assertEquals(userDatabasePage.table.findElement(By.xpath(userDatabasePage.rXpatS(commonPage.dataForDB[i]))).getText(),commonPage.dataForDB[i]);
+            extentTest.log(LogStatus.PASS, "Previous " + commonPage.headerName[i] + " was " + commonPage.dataForDB[i] + " and Current " + commonPage.headerName[i] +
+                    " is: " + userDatabasePage.table.findElement(By.xpath(userDatabasePage.rXpatS(commonPage.dataForDB[i]))).getText());
+        }
+    }
+
 
     @AfterMethod
     public void tearDown(){
