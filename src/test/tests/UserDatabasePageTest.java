@@ -4,7 +4,6 @@ import base.BaseTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -14,9 +13,7 @@ import pages.UserDatabasePage;
 import pages.CommonPage;
 import pojos.User;
 
-import javax.swing.*;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Set;
 import org.openqa.selenium.interactions.Actions;
 
@@ -75,7 +72,7 @@ public class UserDatabasePageTest extends BaseTest {
 
     }
 
-    @Test(description = "Register new record in User-Msg page and click Submit table button then verify data is displayed in User Database table correctly")
+    @Test(description = "Register new record in User-Msg page and click Submit table button then verify data is displayed in User Database table correctly", priority = -1)
     public void verifyTestDataExist() {
         userDatabasePage.moveIntoView(userDatabasePage.table.findElement(By.xpath(userDatabasePage.rXpatS(commonPage.dataForDB[0]))));
         screenshot.takeScreenshotAndLog();
@@ -86,7 +83,7 @@ public class UserDatabasePageTest extends BaseTest {
         }
     }
 
-    @Test(description = "verify default password is in firstname.lastname$ format", priority = -1)
+    @Test(description = "verify default password is in firstname.lastname$ format", priority = -2)
     public void verifyPasswordFormat() {
         userDatabasePage.moveIntoView(userDatabasePage.rows.get(0));
         screenshot.takeScreenshotAndLog();
@@ -133,27 +130,24 @@ public class UserDatabasePageTest extends BaseTest {
     public void verifyEditBtn() {
         userDatabasePage.moveIntoView(userDatabasePage.editBtn);
         screenshot.takeScreenshotAndLog();
-        extentTest.log(LogStatus.INFO, "Previous First name was: " + userDatabasePage.rowFourName.getText());
+        extentTest.log(LogStatus.INFO, "Previous Email was: " + userDatabasePage.rowFourEmail.getText());
         userDatabasePage.click(userDatabasePage.editBtn);
-        String testName = "Wolfesch";
-        extentTest.log(LogStatus.INFO, "Test data name is: " + testName + " - created." );
+        String testEmail = "hahahha@jaja.com";
+        extentTest.log(LogStatus.INFO, "Test data email is: " + testEmail + " - created." );
 
-        userDatabasePage.click(userDatabasePage.firstNameBox);
-        userDatabasePage.firstNameBox.clear();
-        userDatabasePage.sendKeys(userDatabasePage.firstNameBox, testName);
+        userDatabasePage.click(userDatabasePage.emailBox);
+        userDatabasePage.emailBox.clear();
+        userDatabasePage.sendKeys(userDatabasePage.emailBox, testEmail);
         userDatabasePage.click(userDatabasePage.updateBtn);
         screenshot.takeScreenshotAndLog();
-        Assert.assertEquals(userDatabasePage.rowFourName.getText(), testName);
-        extentTest.log(LogStatus.PASS, "Current name is: " + userDatabasePage.rowFourName.getText() + " as same what we wrote: " + testName);
+        Assert.assertEquals(userDatabasePage.rowFourEmail.getText(), testEmail);
+        extentTest.log(LogStatus.PASS, "Current email is: " + userDatabasePage.rowFourEmail.getText() + " as same what we wrote: " + testEmail);
 
         userDatabasePage.click(userDatabasePage.deleteBtn.get(0));
+        userDatabasePage.sleep(1000);
     }
 
 
-    @AfterMethod
 
-    public void tearDown(){
-        getDriver().quit();
-    }
 
 }

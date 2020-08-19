@@ -36,10 +36,6 @@ public class HomePageTest extends BaseTest {
         }
     }
 
-    @AfterMethod
-    public void tearDown(){
-        getDriver().quit();
-    }
 
 
 }

@@ -4,9 +4,12 @@
 <suite name="Home Page">
     <test name="Home Page Test">
         <classes>
-            <class name="tests.HomePageTest">
-
-            </class>
+            <class name="tests.HomePageTest"/>
+<!--            <class name="tests.UserMgtPageTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyTitle"/>-->
+<!--                </methods>-->
+<!--            </class>-->
         </classes>
     </test>
 </suite>
